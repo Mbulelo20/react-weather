@@ -7,11 +7,12 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((res) => {
+        setPermission(true);
         setCoords({
           latitude: res.coords.latitude,
           longitude: res.coords.longitude
         });
-        setPermission(true);
+        
       });
     } else { 
       setPermission(false)

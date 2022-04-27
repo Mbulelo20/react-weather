@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-
+import icon from '../Images/icon.jpg'
 const Dashboard = ({coords, permission}) => {
     const {latitude, longitude} = coords;
-    const [place, setPlace] = useState('Cape Town');
+    const [place, setPlace] = useState('')
     const [forecast, setForecast] = useState({});
 
     const [current, setCurrent] = useState([{
@@ -31,15 +31,16 @@ const Dashboard = ({coords, permission}) => {
         axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
         .then((res) => {            
             setData(res)
+            console.log("rrr", res.data)
         })
         .catch((err) => console.log("error: ",err))
     }
     
     useEffect((permission) => {
+        
         if(permission === true){
             getWeather(); 
         }
-           
     });
 
     if(place.length > 0) {
@@ -68,7 +69,7 @@ const Dashboard = ({coords, permission}) => {
         console.log("xx",res.data)
     }
     return (
-        <div className="container">
+        <div className="container" >
             {forecast.length > 0 ? 
                 <div>                
                     <div className="card" style={{textAlign: 'center', marginTop:'2em'}}>
@@ -108,28 +109,14 @@ const Dashboard = ({coords, permission}) => {
                             <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'30%',marginBottom:'1em', marginLeft:'.5em', backgroundColor: '#F1F3F4',}}/>
                         </div>
                         <h3 style={{fontSize:'80px', textColor: 'red'}}>
-                            {name}, {country.indexOf(' ') > 0  ? country.match(/(\b\S)?/g).join("").toUpperCase().slice(0, 3) : country.slice(0, 3)}
+                            Insta Weather
                         </h3>
                         <p style={{fontSize:'55px', textAlign:'center', marginTop:'-0.5em'}}>
-                            <img src={forecast.length > 1 && forecast[0].day.condition.icon} alt="Avatar" className="" style={{width:"10%"}} />
+                            <img src={icon} alt="Avatar" className="" style={{width:"10%"}} />
                             {temp_c}°C
                         </p>
                     </div>
-                    <div style={userStyle}>
-                        { forecast.length > 0 && forecast.map((f) => (
-                            <div style={{textAlign: 'center'}}>
-                                <h4>{moment(f.date).format('dddd')}</h4>
-                                <h1>max {f.day.maxtemp_c}°C</h1>
-                                <h6>
-                                    Rain: {f.day.daily_chance_of_rain}%
-                                </h6>
-                                <h6>
-                                    Wind: {f.day.maxwind_kph} kph
-                                    {/* {f.day.condition.text} */}
-                                </h6>
-                            </div>
-                        ))}
-                    </div> 
+                    
                 </div>
                 </div>
             }
