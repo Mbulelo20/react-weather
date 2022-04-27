@@ -6,11 +6,13 @@ function App() {
   const [coords, setCoords] = useState({});
   useEffect(() => {
     if (navigator.geolocation) {
-      setPermission(true)
-      navigator.geolocation.getCurrentPosition((res) => setCoords({
+      navigator.geolocation.getCurrentPosition((res) => {
+        setCoords({
           latitude: res.coords.latitude,
           longitude: res.coords.longitude
-      }));
+        });
+        setPermission(true);
+      });
     } else { 
       setPermission(false)
     }
@@ -18,9 +20,9 @@ function App() {
   }, [])
   return (
     <div className="App">
-      {permission === true && 
-        <Dashboard coords={coords} /> 
-      }
+        <Dashboard coords={coords} permission={permission}/> : 
+        
+        
     </div>
   );
 }
