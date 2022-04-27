@@ -27,6 +27,14 @@ const Dashboard = ({coords, permission}) => {
     });
     const {name, country, localtime} = location;
 
+    
+    useEffect((permission) => {
+        
+        if(permission === true){
+            getWeather(); 
+        }
+    });
+
     const getWeather = (latitude, longitude) => {
         axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
         .then((res) => {            
@@ -36,13 +44,6 @@ const Dashboard = ({coords, permission}) => {
         .catch((err) => console.log("error: ",err))
     }
     
-    useEffect((permission) => {
-        
-        if(permission === true){
-            getWeather(); 
-        }
-    });
-
     if(place.length > 0) {
         axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + place + "&days=2")
         .then((res) => {            
