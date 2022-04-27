@@ -2,9 +2,8 @@ import {useState, useEffect} from 'react';
 import Dashboard from './Components/Dashboard';
 
 function App() {
-  const [permission, setPermission] = useState('');
+  const [permission, setPermission] = useState(false);
   const [coords, setCoords] = useState({});
-
   useEffect(() => {
     if (navigator.geolocation) {
       setPermission(true)
@@ -19,7 +18,9 @@ function App() {
   }, [])
   return (
     <div className="App">
-      <Dashboard permission={permission} coords={coords}/>
+      {permission === true && 
+        <Dashboard coords={coords} /> 
+      }
     </div>
   );
 }

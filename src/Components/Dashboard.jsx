@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 
-const Dashboard = ({coords, permission}) => {
+const Dashboard = ({coords}) => {
     const {latitude, longitude} = coords;
     const [place, setPlace] = useState('');
     const [forecast, setForecast] = useState({});
@@ -62,6 +62,7 @@ const Dashboard = ({coords, permission}) => {
             temp_c, last_updated, current_condition
         })
         setForecast(res.data.forecast.forecastday)
+        console.log(res.data)
     }
     return (
         <div className="container">
