@@ -42,7 +42,7 @@ const Dashboard = () => {
         }
 
         getWeather();       
-    }, []);
+    });
 
     const getWeather = (latitude, longitude) => {
 
