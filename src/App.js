@@ -23,7 +23,7 @@ function App() {
     } else { 
       // setPermission(false)
     }
-  }, [coords])
+  })
   return (
     <div className="App">
         {/* <Dashboard coords={coords} permission={permission}/> :  */}
