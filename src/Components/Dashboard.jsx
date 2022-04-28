@@ -29,12 +29,7 @@ const Dashboard = ({coords, permission}) => {
 
     
     useEffect((permission) => {
-        axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=london&days=2")
-        .then((res) => {            
-            setData(res)
-            console.log("rrr", res.data)
-        })
-        .catch((err) => console.log("error: ",err))
+        
         if(permission === true){
             getWeather(); 
         }
