@@ -1,25 +1,25 @@
 import {useState, useEffect} from 'react';
-import Dashboard from './Components/Dashboard';
+// import Dashboard from './Components/Dashboard';
 
 function App() {
-  const [permission, setPermission] = useState(false);
-  const [coords, setCoords] = useState({});
+  // const [permission, setPermission] = useState(false);
+  const [coords, setCoords] = useState([]);
   useEffect(() => {
     console.log('helllo')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((res) => {
-        setPermission(true);
+        // setPermission(true);
         setCoords({
           latitude: res.coords.latitude,
           longitude: res.coords.longitude
         });
-        console.log("2. ",coords)
+        console.log("2. ",coords.latitude)
       });
     } else { 
-      setPermission(false)
+      // setPermission(false)
     }
     console.log("1. ",coords)
-  }, [])
+  }, [coords])
   return (
     <div className="App">
         {/* <Dashboard coords={coords} permission={permission}/> :  */}
