@@ -24,7 +24,7 @@ function App() {
     <div className="App">
         {/* <Dashboard coords={coords} permission={permission}/> :  */}
         
-        
+        <h1>TEST</h1>
     </div>
   );
 }
