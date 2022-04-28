@@ -29,7 +29,12 @@ const Dashboard = ({coords, permission}) => {
 
     
     useEffect((permission) => {
-        
+        axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=london&days=2")
+        .then((res) => {            
+            setData(res)
+            console.log("rrr", res.data)
+        })
+        .catch((err) => console.log("error: ",err))
         if(permission === true){
             getWeather(); 
         }
@@ -69,13 +74,22 @@ const Dashboard = ({coords, permission}) => {
         setForecast(res.data.forecast.forecastday)
         console.log("xx",res.data)
     }
+
+
+    const searchWeather = (place) => {
+        axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + place + "&days=2")
+        .then((res) => {            
+            setData(res)
+        })
+        .catch((err) => console.log("error: ",err));
+    }
     return (
         <div className="container" >
             {forecast.length > 0 ? 
                 <div>                
                     <div className="card" style={{textAlign: 'center', marginTop:'2em'}}>
                         <div>
-                            {/* <input type="button" class="w3-button w3-orange inline-border text-white" value="Search" style={{}}/> */}
+                            <input type="button" class="w3-button w3-orange inline-border text-white" value={place} onClick={searchWeather}/>aa
                             <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'30%',marginBottom:'1em', marginLeft:'.5em', backgroundColor: '#F1F3F4',}}/>
                         </div>
                         <h4>{moment(localtime).format('dddd, h:mma')}</h4>    
