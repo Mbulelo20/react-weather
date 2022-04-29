@@ -119,7 +119,7 @@ const Dashboard = ({coords}) => {
                             <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'45%',marginBottom:'1em',  backgroundColor: '#F1F3F4', borderRadius: '50px'}}/>
                         </div>
                         <h3 style={{fontSize:'80px', textColor: 'red'}}>
-                            Insta Weather
+                            Instant React Weather
                         </h3>
                         <p style={{fontSize:'55px', textAlign:'center', marginTop:'-0.5em'}}>
                             <img src={icon} alt="Avatar" className="" style={{width:"10%"}} />

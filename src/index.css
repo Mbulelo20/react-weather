@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./Images//bgd.jpg');
+  background-image: url('./Images/bgd.jpg');
   background-size: cover;
   background-attachment: fixed;
   /* background-color: rgb(202, 237, 255); */
