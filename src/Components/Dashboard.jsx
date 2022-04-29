@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import icon from '../Images/icon.jpg';
@@ -28,12 +28,11 @@ const Dashboard = ({coords}) => {
     });
     const {name, country, localtime} = location;
 
-    useEffect( (permission) => {
+    useEffect((permission) => {
         if(permission === true){
             axios.get("https://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
             .then((res) => setData(res))
             .catch(err => console.log(err))
-            
         }
     }, [latitude,longitude]);
 
@@ -42,11 +41,10 @@ const Dashboard = ({coords}) => {
         .then((res) => setData(res))
         .catch(err => console.log(err))
     }
+
     if(place.length > 0) {
         axios.get("https://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + place + "&days=2")
-        .then((res) => {            
-            setData(res)
-        })
+        .then((res) => {setData(res)})
         .catch((err) => console.log("error: ",err));
     }
     else { getWeather(latitude, longitude) };
@@ -72,27 +70,22 @@ const Dashboard = ({coords}) => {
             {forecast.length > 0 ? 
                 <div>                
                     <div style={{textAlign: 'center', marginTop:'2em'}}>
-                            {/* <input type="button" class="w3-button w3-orange inline-border text-white" value={place} onClick={searchWeather} placeholder="Search city"/> */}
-                            <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{margin:'auto',display: 'inline-block', width: '45%',paddingLeft: '1em', paddingTop:'0.4em',marginBottom:'1em', backgroundColor: '#F1F3F4', borderRadius:'50px'}}/>
-                            
-                        </div>
-                       <div style={{margin:'auto', marginTop:'2em'}}>
-                            
-                        </div> 
+                        {/* <input type="button" class="w3-button w3-orange inline-border text-white" value={place} onClick={searchWeather} placeholder="Search city"/> */}
+                        <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{margin:'auto',display: 'inline-block', width: '45%',paddingLeft: '1em', paddingTop:'0.4em',marginBottom:'1em', backgroundColor: '#F1F3F4', borderRadius:'50px'}}/>
+                    </div>
                     <div className="card" style={{textAlign: 'center',margin:'auto', marginTop:'2em',width: '60%'}}>
-                    <h1 >
-                                {name}, {country.indexOf(' ') > 0  ? country.match(/(\b\S)?/g).join("").toUpperCase().slice(0, 3) : country.slice(0, 3)}
-                            </h1>
+                        <h1 >
+                            {name}, {country.indexOf(' ') > 0  ? country.match(/(\b\S)?/g).join("").toUpperCase().slice(0, 3) : country.slice(0, 3)}
+                        </h1>
                         <h4>{moment(localtime).format('dddd, h:mma')}</h4>    
-                        
                         <p style={{fontSize:'55px', textAlign:'center', marginTop:'-0.5em', color:'orange'}}>
                             <img src={forecast.length > 1 && forecast[0].day.condition.icon} alt="Avatar" className="" style={{width:"10%"}} />
                             {temp_c}°C
                         </p>
                     </div>
-                    <div >
-                        { forecast.length > 0 && forecast.map((f) => (
-                            <>
+                    <div>
+                        {forecast.length > 0 && forecast.map((f) => (
+                            <Fragment>
                             <div style={{textAlign: 'center', backgroundColor: 'black', opacity:'0.5'}}>
                                 <h2>{moment(f.date).format('dddd')}</h2>
                                 max<h1 style={{display: 'inline-block', color:'orange'}}> 
@@ -109,7 +102,7 @@ const Dashboard = ({coords}) => {
                                     </h4>
                                 </div>
                             </div>
-                            </>
+                            </Fragment>
                         ))}
                     </div> 
                 </div> :
@@ -132,15 +125,5 @@ const Dashboard = ({coords}) => {
     )
 }
 
-// const userStyle = {
-//     width: '50%',
-//     backgroundColor: 'black',
-//     opacity: '0.6',
-//     display: 'grid',
-//     gridTemplateColumns: 'repeat(2, 1fr)',
-//     gridColumnGap: '1em',
-//     marginTop: '5em', 
-//     margin: 'auto',
-// }
 
 export default Dashboard;

@@ -4,6 +4,7 @@ import Dashboard from './Components/Dashboard';
 function App() {
   const [permission, setPermission] = useState(false);
   const [coords, setCoords] = useState({});
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((res) => {
@@ -16,7 +17,6 @@ function App() {
     } else { 
       setPermission(false)
     }
-
   }, [])
   return (
     <div className="App">
