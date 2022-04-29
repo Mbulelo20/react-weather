@@ -5,7 +5,7 @@ import icon from '../Images/icon.jpg';
 
 const Dashboard = ({coords}) => {
     const {latitude, longitude} = coords;
-    const [place, setPlace] = useState('London')
+    const [place, setPlace] = useState('')
     const [forecast, setForecast] = useState({});
 
     const [current, setCurrent] = useState([{
@@ -71,15 +71,20 @@ const Dashboard = ({coords}) => {
         <div className="container" >
             {forecast.length > 0 ? 
                 <div>                
-                    <div className="card" style={{textAlign: 'center', marginTop:'2em'}}>
-                        <div>
+                    <div style={{textAlign: 'center', marginTop:'2em'}}>
                             {/* <input type="button" class="w3-button w3-orange inline-border text-white" value={place} onClick={searchWeather} placeholder="Search city"/> */}
-                            <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'30%',marginBottom:'1em', marginLeft:'.5em', backgroundColor: '#F1F3F4', borderRadius:'50px'}}/>
+                            <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{margin:'auto',display: 'inline-block', width: '45%',paddingLeft: '1em', paddingTop:'0.4em',marginBottom:'1em', backgroundColor: '#F1F3F4', borderRadius:'50px'}}/>
+                            
                         </div>
+                       <div style={{margin:'auto', marginTop:'2em'}}>
+                            
+                        </div> 
+                    <div className="card" style={{textAlign: 'center',margin:'auto', marginTop:'2em',width: '60%'}}>
+                    <h1 >
+                                {name}, {country.indexOf(' ') > 0  ? country.match(/(\b\S)?/g).join("").toUpperCase().slice(0, 3) : country.slice(0, 3)}
+                            </h1>
                         <h4>{moment(localtime).format('dddd, h:mma')}</h4>    
-                        <h3 style={{fontSize:'80px'}}>
-                            {name}, {country.indexOf(' ') > 0  ? country.match(/(\b\S)?/g).join("").toUpperCase().slice(0, 3) : country.slice(0, 3)}
-                        </h3>
+                        
                         <p style={{fontSize:'55px', textAlign:'center', marginTop:'-0.5em', color:'orange'}}>
                             <img src={forecast.length > 1 && forecast[0].day.condition.icon} alt="Avatar" className="" style={{width:"10%"}} />
                             {temp_c}°C
@@ -111,7 +116,7 @@ const Dashboard = ({coords}) => {
                 <div>
                     <div className="card" style={{textAlign: 'center', marginTop:'2em'}}>
                         <div>
-                            <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'30%',marginBottom:'1em', marginLeft:'.5em', backgroundColor: '#F1F3F4',}}/>
+                            <input type="text" placeholder="Search city" className="w3-input" value={place} onChange={(e) => setPlace(e.target.value)} style={{display: 'inline-block',paddingLeft: '1em', paddingTop:'0.4em',width:'45%',marginBottom:'1em',  backgroundColor: '#F1F3F4', borderRadius: '50px'}}/>
                         </div>
                         <h3 style={{fontSize:'80px', textColor: 'red'}}>
                             Insta Weather
