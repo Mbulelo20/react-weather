@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import icon from '../Images/icon.jpg';
-import Chart from './Chart';
 
 const Dashboard = ({coords}) => {
     const {latitude, longitude} = coords;
-    const [place, setPlace] = useState('')
+    const [place, setPlace] = useState('London')
     const [forecast, setForecast] = useState({});
 
     const [current, setCurrent] = useState([{
@@ -31,7 +30,7 @@ const Dashboard = ({coords}) => {
 
     useEffect( (permission) => {
         if(permission === true){
-            axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
+            axios.get("https://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
             .then((res) => setData(res))
             .catch(err => console.log(err))
             
@@ -39,12 +38,12 @@ const Dashboard = ({coords}) => {
     }, [latitude,longitude]);
 
     const getWeather =  (latitude, longitude) => {
-        axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
+        axios.get("https://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + latitude + "," + longitude + "&days=2")
         .then((res) => setData(res))
         .catch(err => console.log(err))
     }
     if(place.length > 0) {
-        axios.get("http://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + place + "&days=2")
+        axios.get("https://api.weatherapi.com/v1/forecast.json?key=a725b42ab3ce4d768bb15630222304&q=" + place + "&days=2")
         .then((res) => {            
             setData(res)
         })
@@ -90,7 +89,7 @@ const Dashboard = ({coords}) => {
                         { forecast.length > 0 && forecast.map((f) => (
                             <>
                             <div style={{textAlign: 'center', backgroundColor: 'black', opacity:'0.5'}}>
-                                <h4>{moment(f.date).format('dddd')}</h4>
+                                <h2>{moment(f.date).format('dddd')}</h2>
                                 max<h1 style={{display: 'inline-block', color:'orange'}}> 
                                     {f.day.maxtemp_c}°C
                                 </h1>
@@ -105,11 +104,7 @@ const Dashboard = ({coords}) => {
                                     </h4>
                                 </div>
                             </div>
-                            <div>
-                                <Chart coords={coords}/>
-                            </div>
                             </>
-                            
                         ))}
                     </div> 
                 </div> :
@@ -132,15 +127,15 @@ const Dashboard = ({coords}) => {
     )
 }
 
-const userStyle = {
-    width: '50%',
-    backgroundColor: 'black',
-    opacity: '0.6',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridColumnGap: '1em',
-    marginTop: '5em', 
-    margin: 'auto',
-}
+// const userStyle = {
+//     width: '50%',
+//     backgroundColor: 'black',
+//     opacity: '0.6',
+//     display: 'grid',
+//     gridTemplateColumns: 'repeat(2, 1fr)',
+//     gridColumnGap: '1em',
+//     marginTop: '5em', 
+//     margin: 'auto',
+// }
 
 export default Dashboard;
